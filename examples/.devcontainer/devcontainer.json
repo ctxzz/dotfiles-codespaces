@@ -1,0 +1,56 @@
+{
+  // devcontainer.json の例
+  // このファイルをプロジェクトの .devcontainer/ ディレクトリに配置すると、
+  // Codespaces起動時に自動的にdotfilesが適用されます
+  
+  "name": "Your Project Name",
+  
+  // ベースイメージを選択
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  
+  // dotfilesの設定
+  "dotfiles": {
+    "repository": "your-username/dotfiles-codespaces",
+    "installCommand": "install.sh",
+    "targetPath": "~/dotfiles"
+  },
+  
+  // VSCode拡張機能の自動インストール
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      }
+    }
+  },
+  
+  // ポート転送の設定
+  "forwardPorts": [3000, 8080],
+  
+  // Codespaces起動時に実行するコマンド
+  "postCreateCommand": "echo 'Welcome to your Codespace!'",
+  
+  // コンテナに追加する機能
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  
+  // リモートユーザー
+  "remoteUser": "codespace"
+}

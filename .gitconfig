@@ -14,7 +14,7 @@
 # ============================================================================
 [core]
 	# グローバルな除外設定ファイル
-	excludesfile = ~/.gitignore_global
+	excludesfile = /home/runner/.gitignore_global
 	
 	# エディタ設定（VSCode優先）
 	editor = code --wait

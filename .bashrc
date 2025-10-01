@@ -37,9 +37,13 @@ fi
 export PAGER='less'
 export LESS='-R -F -X'
 
-# 言語設定
-export LANG=ja_JP.UTF-8
-export LC_ALL=ja_JP.UTF-8
+# 言語設定（環境に応じて自動調整）
+if locale -a 2>/dev/null | grep -q ja_JP.UTF-8; then
+    export LANG=ja_JP.UTF-8
+    export LC_ALL=ja_JP.UTF-8
+elif [ -z "$LANG" ]; then
+    export LANG=en_US.UTF-8
+fi
 
 # カラー設定
 export CLICOLOR=1
