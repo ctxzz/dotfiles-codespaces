@@ -1,0 +1,284 @@
+# ~/.gitconfig: Git設定ファイル
+# GitHub Codespaces用のGit設定
+
+# ============================================================================
+# ユーザー情報
+# ============================================================================
+[user]
+	# Codespacesでは自動的に設定されますが、ローカルで使う場合は設定してください
+	# name = Your Name
+	# email = your.email@example.com
+
+# ============================================================================
+# コアの設定
+# ============================================================================
+[core]
+	# グローバルな除外設定ファイル
+	excludesfile = ~/.gitignore_global
+	
+	# エディタ設定（VSCode優先）
+	editor = code --wait
+	
+	# ページャー設定
+	pager = less -FRX
+	
+	# 改行コードの自動変換を無効化
+	autocrlf = input
+	
+	# ファイルシステムの大文字小文字を区別しない設定
+	ignorecase = false
+	
+	# Unicode文字の正規化
+	precomposeunicode = true
+	
+	# 空白文字の扱い
+	whitespace = trailing-space,space-before-tab
+
+# ============================================================================
+# カラー設定
+# ============================================================================
+[color]
+	# カラー出力を有効化
+	ui = auto
+	
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+
+[color "status"]
+	added = green
+	changed = yellow
+	untracked = red
+
+# ============================================================================
+# diff/merge設定
+# ============================================================================
+[diff]
+	# より良いdiffアルゴリズム
+	algorithm = histogram
+	
+	# 移動検出
+	renames = copies
+	
+	# より読みやすい差分
+	colorMoved = default
+
+[merge]
+	# マージ時のコンフリクトスタイル
+	conflictstyle = diff3
+	
+	# マージツール
+	tool = vscode
+
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
+
+[diff]
+	tool = vscode
+
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+
+# ============================================================================
+# プル/プッシュ設定
+# ============================================================================
+[pull]
+	# プル時にrebaseする（マージコミットを作らない）
+	rebase = true
+
+[push]
+	# 現在のブランチと同名のリモートブランチにプッシュ
+	default = current
+	
+	# タグを自動的にプッシュ
+	followTags = true
+	
+	# プッシュ時にリモートでのフックを自動実行
+	autoSetupRemote = true
+
+[fetch]
+	# 削除されたリモートブランチをローカルでも削除
+	prune = true
+
+# ============================================================================
+# リベース設定
+# ============================================================================
+[rebase]
+	# rebase時に自動的にstash/unstash
+	autoStash = true
+	
+	# rebase時にautosquash有効化
+	autoSquash = true
+
+# ============================================================================
+# ブランチ設定
+# ============================================================================
+[branch]
+	# 新しいブランチ作成時に自動的にリモート追跡
+	autoSetupRebase = always
+
+# ============================================================================
+# エイリアス（便利なGitコマンドのショートカット）
+# ============================================================================
+[alias]
+	# ステータス関連
+	s = status --short --branch
+	st = status
+	
+	# コミット関連
+	c = commit
+	cm = commit -m
+	ca = commit --amend
+	can = commit --amend --no-edit
+	
+	# ブランチ関連
+	b = branch
+	ba = branch -a
+	bd = branch -d
+	bD = branch -D
+	
+	# チェックアウト関連
+	co = checkout
+	cob = checkout -b
+	com = checkout main
+	cod = checkout develop
+	
+	# マージ関連
+	m = merge
+	mnf = merge --no-ff
+	
+	# プル/プッシュ関連
+	p = push
+	pf = push --force-with-lease
+	pu = push -u origin HEAD
+	pl = pull
+	
+	# リベース関連
+	rb = rebase
+	rbi = rebase -i
+	rbc = rebase --continue
+	rba = rebase --abort
+	
+	# ログ関連
+	l = log --oneline
+	lg = log --graph --pretty=format:'%C(red)%h%C(reset) -%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' --abbrev-commit
+	lga = log --graph --all --pretty=format:'%C(red)%h%C(reset) -%C(yellow)%d%C(reset) %s %C(green)(%cr) %C(bold blue)<%an>%C(reset)' --abbrev-commit
+	ll = log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cblue [%cn]' --decorate --numstat
+	
+	# 差分関連
+	d = diff
+	ds = diff --staged
+	dc = diff --cached
+	
+	# 追加/削除関連
+	a = add
+	aa = add --all
+	au = add --update
+	ap = add --patch
+	
+	# リセット関連
+	unstage = reset HEAD --
+	undo = reset --soft HEAD^
+	
+	# スタッシュ関連
+	ss = stash save
+	sp = stash pop
+	sl = stash list
+	
+	# タグ関連
+	t = tag
+	
+	# リモート関連
+	r = remote
+	rv = remote -v
+	
+	# クローン関連
+	cl = clone
+	
+	# 便利なエイリアス
+	alias = config --get-regexp ^alias\\.  # エイリアス一覧を表示
+	last = log -1 HEAD                      # 最新のコミットを表示
+	amend = commit --amend --reuse-message=HEAD  # 最新のコミットを修正
+	contributors = shortlog --summary --numbered  # コントリビューター一覧
+	ignore = update-index --assume-unchanged      # ファイルを無視
+	unignore = update-index --no-assume-unchanged # 無視を解除
+	ignored = !git ls-files -v | grep "^[[:lower:]]"  # 無視されているファイルを表示
+	
+	# ブランチの情報を表示
+	branches = for-each-ref --sort=-committerdate --format='%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)' refs/remotes
+	
+	# ファイルの履歴を表示
+	filelog = log -u
+	
+	# 今日のコミットを表示
+	today = log --since=midnight --author='$(git config user.name)' --oneline
+	
+	# ブランチをクリーンアップ
+	cleanup = !git branch --merged | grep -v '\\*\\|main\\|master\\|develop' | xargs -n 1 git branch -d
+	
+	# 作業ツリーをクリーン
+	clean-all = clean -fdx
+	
+	# 統計情報
+	stats = shortlog -sn
+	
+	# コミットの検索
+	search = log --all --oneline --grep
+
+# ============================================================================
+# GitHub設定
+# ============================================================================
+[github]
+	user = your-github-username
+
+# ============================================================================
+# 追加機能
+# ============================================================================
+[help]
+	# タイポしたコマンドを自動修正
+	autocorrect = 1
+
+[credential]
+	# 認証情報のキャッシュ（Codespacesでは不要）
+	helper = cache --timeout=3600
+
+[init]
+	# デフォルトブランチ名
+	defaultBranch = main
+
+[log]
+	# ログの日付フォーマット
+	date = relative
+
+[format]
+	# プリティプリント
+	pretty = format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
+
+# ============================================================================
+# URL短縮設定
+# ============================================================================
+[url "git@github.com:"]
+	insteadOf = gh:
+
+[url "https://github.com/"]
+	insteadOf = github:
+
+# ============================================================================
+# その他
+# ============================================================================
+[advice]
+	# 有用なアドバイスを表示
+	statusHints = true
+	commitBeforeMerge = true
+	
+[rerere]
+	# コンフリクト解決を記録して再利用
+	enabled = true
