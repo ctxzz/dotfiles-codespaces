@@ -171,7 +171,7 @@ alias ff='find . -type f -name'
 alias fd='find . -type d -name'
 
 # プロセス関連
-alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'
+alias psg='ps aux | grep -v grep | grep -i -e VSZ'
 alias topcpu='ps aux | sort -nrk 3,3 | head -n 5'
 alias topmem='ps aux | sort -nrk 4,4 | head -n 5'
 
