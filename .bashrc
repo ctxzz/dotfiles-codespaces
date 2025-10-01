@@ -128,7 +128,13 @@ alias ff='find . -type f -name'
 alias fd='find . -type d -name'
 
 # プロセス関連
-alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'
+psg() {
+    if [ $# -eq 0 ]; then
+        ps aux | grep -v grep | grep -i -e VSZ
+    else
+        ps aux | grep -v grep | grep -i -e VSZ -e "$1"
+    fi
+}
 alias topcpu='ps aux | sort -nrk 3,3 | head -n 5'
 alias topmem='ps aux | sort -nrk 4,4 | head -n 5'
 
