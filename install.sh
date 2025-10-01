@@ -268,10 +268,18 @@ if [[ "$MINIMAL_INSTALL" == false ]]; then
     # Starshipのインストール
     if ! command_exists starship; then
         info "Starshipをインストールしています..."
-        if curl -sS https://starship.rs/install.sh | sh -s -- -y >/dev/null 2>&1; then
-            success "Starshipをインストールしました"
+        TMP_STARSHIP_SCRIPT="$(mktemp)"
+        if curl -fsSL https://starship.rs/install.sh -o "$TMP_STARSHIP_SCRIPT"; then
+            info "Starshipインストールスクリプトの最初の数行を表示します:"
+            head -n 10 "$TMP_STARSHIP_SCRIPT"
+            if sh "$TMP_STARSHIP_SCRIPT" -y >/dev/null 2>&1; then
+                success "Starshipをインストールしました"
+            else
+                warning "Starshipのインストールに失敗しました"
+            fi
+            rm -f "$TMP_STARSHIP_SCRIPT"
         else
-            warning "Starshipのインストールに失敗しました"
+            warning "Starshipインストールスクリプトのダウンロードに失敗しました"
         fi
     else
         success "Starship は既にインストールされています ($(starship --version))"
