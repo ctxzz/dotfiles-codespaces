@@ -46,7 +46,7 @@ GitHub Codespaces用の包括的なdotfiles設定集です。Bash/Zsh両対応�
 1. **GitHub Codespacesの設定で dotfiles を有効化**
 
    - GitHubの Settings → Codespaces → Dotfiles
-   - このリポジトリ (`your-username/dotfiles-codespaces`) を指定
+   - このリポジトリ (`ctxzz/dotfiles-codespaces`) を指定
    - "Install dotfiles automatically" をチェック
 
 2. **新しいCodespaceを作成すると自動的に適用されます**
@@ -55,7 +55,7 @@ GitHub Codespaces用の包括的なdotfiles設定集です。Bash/Zsh両対応�
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/your-username/dotfiles-codespaces.git ~/.dotfiles
+git clone https://github.com/ctxzz/dotfiles-codespaces.git ~/.dotfiles
 
 # インストールスクリプトを実行
 cd ~/.dotfiles
@@ -98,7 +98,7 @@ GitHub Codespacesは、リポジトリに `.devcontainer/devcontainer.json` が�
 
 ```json
 {
-  "dotfilesRepository": "your-username/dotfiles-codespaces",
+  "dotfilesRepository": "ctxzz/dotfiles-codespaces",
   "dotfilesInstallCommand": "install.sh",
   "dotfilesTargetPath": "~/dotfiles"
 }
@@ -110,7 +110,7 @@ GitHub Codespacesは、リポジトリに `.devcontainer/devcontainer.json` が�
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/your-username/dotfiles-codespaces.git ~/.dotfiles
+git clone https://github.com/ctxzz/dotfiles-codespaces.git ~/.dotfiles
 
 # インストール
 cd ~/.dotfiles
@@ -401,7 +401,7 @@ tmux source-file ~/.tmux.conf
 
 ```bash
 cd ~
-git clone https://github.com/your-username/dotfiles-codespaces.git .dotfiles
+git clone https://github.com/ctxzz/dotfiles-codespaces.git .dotfiles
 cd .dotfiles
 ./install.sh --force
 ```
