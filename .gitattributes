@@ -1,0 +1,55 @@
+# .gitattributes - Git属性設定
+# 改行コードとファイルの扱いを定義
+
+# デフォルト設定: テキストファイルの改行コードを自動変換
+* text=auto
+
+# シェルスクリプトは常にLF
+*.sh text eol=lf
+*.bash text eol=lf
+*.zsh text eol=lf
+
+# 設定ファイルは常にLF
+.bashrc text eol=lf
+.zshrc text eol=lf
+.profile text eol=lf
+.vimrc text eol=lf
+.tmux.conf text eol=lf
+.gitconfig text eol=lf
+.gitignore text eol=lf
+.gitignore_global text eol=lf
+.gitattributes text eol=lf
+
+# TOMLファイル
+*.toml text eol=lf
+
+# Markdownファイル
+*.md text eol=lf
+
+# JSONファイル
+*.json text eol=lf
+
+# YAMLファイル
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# バイナリファイルは変換しない
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.mp3 binary
+*.flv binary
+*.fla binary
+*.swf binary
+*.gz binary
+*.zip binary
+*.7z binary
+*.ttf binary
+*.eot binary
+*.woff binary
+*.woff2 binary
+*.pyc binary

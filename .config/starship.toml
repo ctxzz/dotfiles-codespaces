@@ -1,0 +1,364 @@
+# ~/.config/starship.toml: Starshipプロンプト設定
+# GitHub Codespaces用のStarship設定
+
+# ============================================================================
+# 基本設定
+# ============================================================================
+
+# タイムアウト時間（ミリ秒）
+scan_timeout = 30
+
+# コマンド実行タイムアウト（ミリ秒）
+command_timeout = 500
+
+# 改行を追加
+add_newline = true
+
+# ============================================================================
+# フォーマット設定
+# ============================================================================
+
+# プロンプトのフォーマット
+format = """
+[┌───────────────────────────────────────────────────────>](bold green)
+[│](bold green)$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$kubernetes\
+$directory\
+$vcsh\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$haskell\
+$helm\
+$java\
+$julia\
+$kotlin\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$conda\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$env_var\
+$crystal\
+$custom\
+$sudo\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$time\
+$status\
+$shell\
+[└─>](bold green) """
+
+# 右側のプロンプト
+right_format = """$all"""
+
+# 継続プロンプト
+continuation_prompt = "[▶▶](bold green) "
+
+# ============================================================================
+# ユーザー名
+# ============================================================================
+[username]
+style_user = "bold yellow"
+style_root = "bold red"
+format = "[$user]($style) "
+disabled = false
+show_always = true
+
+# ============================================================================
+# ホスト名
+# ============================================================================
+[hostname]
+ssh_only = false
+format = "[@$hostname](bold blue) "
+disabled = false
+
+# ============================================================================
+# ディレクトリ
+# ============================================================================
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+format = "[$path]($style)[$read_only]($read_only_style) "
+style = "bold cyan"
+read_only = "🔒"
+read_only_style = "red"
+home_symbol = "~"
+
+# ディレクトリの短縮設定
+[directory.substitutions]
+"Documents" = "📄"
+"Downloads" = "📥"
+"Music" = "🎵"
+"Pictures" = "🖼"
+"Desktop" = "🖥"
+
+# ============================================================================
+# Git設定
+# ============================================================================
+[git_branch]
+symbol = " "
+format = "[$symbol$branch]($style) "
+style = "bold purple"
+
+[git_commit]
+commit_hash_length = 7
+format = "[\\($hash$tag\\)]($style) "
+style = "bold green"
+only_detached = true
+tag_symbol = "🏷 "
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+style = "bright-black"
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+style = "bold red"
+conflicted = "🏳"
+up_to_date = "✓"
+untracked = "🤷"
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+stashed = "📦"
+modified = "📝"
+staged = '[++\($count\)](green)'
+renamed = "👅"
+deleted = "🗑"
+
+[git_metrics]
+added_style = "bold green"
+deleted_style = "bold red"
+format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
+disabled = false
+
+# ============================================================================
+# 言語・ツール設定
+# ============================================================================
+
+# Node.js
+[nodejs]
+symbol = " "
+format = "[$symbol($version )]($style)"
+style = "bold green"
+
+# Python
+[python]
+symbol = " "
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+style = "yellow bold"
+pyenv_version_name = false
+
+# Rust
+[rust]
+symbol = " "
+format = "[$symbol($version )]($style)"
+style = "bold red"
+
+# Go
+[golang]
+symbol = " "
+format = "[$symbol($version )]($style)"
+style = "bold cyan"
+
+# Java
+[java]
+symbol = " "
+format = "[$symbol($version )]($style)"
+style = "red dimmed"
+
+# Ruby
+[ruby]
+symbol = " "
+format = "[$symbol($version )]($style)"
+style = "bold red"
+
+# PHP
+[php]
+symbol = " "
+format = "[$symbol($version )]($style)"
+style = "147 bold"
+
+# Docker
+[docker_context]
+symbol = " "
+format = "[$symbol$context]($style) "
+style = "blue bold"
+
+# Kubernetes
+[kubernetes]
+symbol = "☸ "
+format = '[$symbol$context( \($namespace\))]($style) '
+style = "cyan bold"
+disabled = false
+
+# ============================================================================
+# パッケージ
+# ============================================================================
+[package]
+symbol = "📦 "
+format = "[$symbol$version]($style) "
+style = "208 bold"
+
+# ============================================================================
+# AWS
+# ============================================================================
+[aws]
+symbol = "  "
+format = '[$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
+style = "bold yellow"
+
+# ============================================================================
+# コマンド実行時間
+# ============================================================================
+[cmd_duration]
+min_time = 500
+format = "⏱ [$duration]($style) "
+style = "bold yellow"
+show_milliseconds = false
+show_notifications = false
+
+# ============================================================================
+# ジョブ
+# ============================================================================
+[jobs]
+symbol = "✦"
+format = "[$symbol$number]($style) "
+style = "bold blue"
+
+# ============================================================================
+# バッテリー
+# ============================================================================
+[battery]
+full_symbol = "🔋"
+charging_symbol = "⚡"
+discharging_symbol = "💀"
+format = "[$symbol$percentage]($style) "
+
+[[battery.display]]
+threshold = 10
+style = "bold red"
+
+[[battery.display]]
+threshold = 30
+style = "bold yellow"
+
+# ============================================================================
+# 時刻
+# ============================================================================
+[time]
+disabled = false
+format = "🕙[$time]($style) "
+style = "bold white"
+time_format = "%T"
+
+# ============================================================================
+# ステータス
+# ============================================================================
+[status]
+style = "bg:blue"
+symbol = "🔴"
+format = '[\[$symbol $common_meaning$signal_name$maybe_int\]]($style) '
+map_symbol = true
+disabled = false
+
+# ============================================================================
+# シェル
+# ============================================================================
+[shell]
+fish_indicator = "🐠"
+bash_indicator = "bash"
+zsh_indicator = "zsh"
+powershell_indicator = "_"
+disabled = false
+format = "[$indicator]($style) "
+style = "cyan bold"
+
+# ============================================================================
+# メモリ使用量
+# ============================================================================
+[memory_usage]
+disabled = false
+threshold = 75
+format = "[$symbol${ram}( | ${swap})]($style) "
+style = "bold dimmed white"
+symbol = "🐏 "
+
+# ============================================================================
+# カスタムモジュール: Codespaces
+# ============================================================================
+[custom.codespaces]
+command = 'echo $CODESPACE_NAME'
+when = '[ -n "$CODESPACES" ]'
+format = '[🚀 $output]($style) '
+style = 'bold purple'
+description = 'GitHub Codespaces名を表示'
+
+# ============================================================================
+# 環境変数
+# ============================================================================
+[env_var.CODESPACES]
+symbol = "🚀 "
+format = "[$symbol$env_value]($style) "
+style = "bold purple"
+
+# ============================================================================
+# 文字
+# ============================================================================
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+vicmd_symbol = "[V](bold green)"
+
+# ============================================================================
+# Nix Shell
+# ============================================================================
+[nix_shell]
+symbol = "❄️ "
+format = '[$symbol$state( \($name\))]($style) '
+style = "bold blue"
