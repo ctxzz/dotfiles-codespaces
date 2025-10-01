@@ -120,7 +120,7 @@ echo -e "${BLUE}[6] tmux設定のテスト${NC}"
 
 # tmux設定ファイルが構文エラーなく読み込めるかテスト（tmuxがインストールされている場合）
 if command -v tmux >/dev/null 2>&1; then
-    tmux -f "$DOTFILES_DIR/.tmux.conf" -c "quit" 2>/dev/null || tmux -f "$DOTFILES_DIR/.tmux.conf" source-file "$DOTFILES_DIR/.tmux.conf" 2>/dev/null
+    tmux -f "$DOTFILES_DIR/.tmux.conf" new-session -d \; source-file "$DOTFILES_DIR/.tmux.conf" \; kill-session 2>/dev/null
     test_result $? ".tmux.conf にシンタックスエラーがない"
 else
     echo -e "${YELLOW}⊘${NC} tmuxがインストールされていないためスキップ"
