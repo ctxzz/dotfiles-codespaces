@@ -418,23 +418,3 @@ cd .dotfiles
 ## 📝 ライセンス
 
 MIT License
-
-## 🤝 貢献
-
-プルリクエストやイシューは大歓迎です！
-
-1. このリポジトリをフォーク
-2. フィーチャーブランチを作成 (`git checkout -b feature/amazing-feature`)
-3. 変更をコミット (`git commit -m 'Add some amazing feature'`)
-4. ブランチにプッシュ (`git push origin feature/amazing-feature`)
-5. プルリクエストを作成
-
-## 👤 作者
-
-あなたの名前 - [@your-username](https://github.com/your-username)
-
----
-
-💡 **ヒント**: このREADMEをカスタマイズして、あなた自身の情報を追加してください！
-
-🚀 **Happy Coding in GitHub Codespaces!**
